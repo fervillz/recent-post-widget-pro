@@ -40,47 +40,47 @@ class RPW_Pro {
 	 */
 	public function __construct() {
 
-		// Set the constants needed by the plugin.
-		add_action( 'plugins_loaded', array( &$this, 'constants' ), 1 );
-
-		// Internationalize the text strings used.
+		// Internationalize
 		add_action( 'plugins_loaded', array( &$this, 'i18n' ), 2 );
+
+		// Set the constants
+		add_action( 'plugins_loaded', array( &$this, 'constants' ), 1 );
 
 		// Load the functions files.
 		add_action( 'plugins_loaded', array( &$this, 'includes' ), 3 );
 
-		// Load the admin style.
+		// Load the admin style
 		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_style' ) );
 
-		// Register widget.
+		// Register widget
 		add_action( 'widgets_init', array( &$this, 'register_widget' ) );
 
-		// Register new image size.
+		// Register new image size
 		add_action( 'init', array( &$this, 'register_image_size' ) );
 
 	}
 
 	/**
-	 * Defines constants used by the plugin.
+	 * Define constants (optional)
 	 *
 	 * @since  0.1
 	 */
 	public function constants() {
 
 		// Set constant path to the plugin directory.
-		define( 'RPWE_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+		define( 'RPWPro_DIR', plugin_dir_path( __FILE__ ) ) ;
 
 		// Set the constant path to the plugin directory URI.
-		define( 'RPWE_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+		define( 'RPWPro_URL', plugin_dir_url( __FILE__ ) ) ;
 
 		// Set the constant path to the includes directory.
-		define( 'RPWE_INCLUDES', RPWE_DIR . trailingslashit( 'includes' ) );
+		define( 'RPWPro_INCLUDES', RPWPro_DIR . trailingslashit( 'includes' ) );
 
-		// Set the constant path to the includes directory.
-		define( 'RPWE_CLASS', RPWE_DIR . trailingslashit( 'classes' ) );
+		// Set the constant path to the widgets directory.
+		define( 'RPWPro_WIDGETS', RPWPro_DIR . trailingslashit( 'widgets' ) );
 
 		// Set the constant path to the assets directory.
-		define( 'RPWE_ASSETS', RPWE_URI . trailingslashit( 'assets' ) );
+		define( 'RPWPro_ASSETS', RPWPro_URL . trailingslashit( 'assets' ) );
 
 	}
 
@@ -90,7 +90,7 @@ class RPW_Pro {
 	 * @since  0.1
 	 */
 	public function i18n() {
-		load_plugin_textdomain( 'recent-posts-widget-Pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'recent-posts-widget-pro', false, RPWPro_DIR.'/lang/');
 	}
 
 	/**
@@ -99,10 +99,10 @@ class RPW_Pro {
 	 * @since  0.1
 	 */
 	public function includes() {
-		require_once( RPWE_INCLUDES . 'resizer.php' );
-		require_once( RPWE_INCLUDES . 'functions.php' );
-		require_once( RPWE_INCLUDES . 'shortcode.php' );
-		require_once( RPWE_INCLUDES . 'helpers.php' );
+		//require_once( RPWPro_INCLUDES . 'resizer.php' );
+		//require_once( RPWPro_INCLUDES . 'functions.php' );
+		//require_once( RPWPro_INCLUDES . 'shortcode.php' );
+		//require_once( RPWPro_INCLUDES . 'helpers.php' );
 	}
 
 	/**
@@ -112,7 +112,7 @@ class RPW_Pro {
 	 */
 	public function admin_style() {
 		// Loads the widget style.
-		wp_enqueue_style( 'rpwe-admin-style', trailingslashit( RPWE_ASSETS ) . 'css/rpwe-admin.css', null, null );
+		//wp_enqueue_style( 'RPWPro-admin-style', trailingslashit( RPWPro_ASSETS ) . 'css/RPWPro-admin.css', null, null );
 	}
 
 	/**
@@ -121,8 +121,8 @@ class RPW_Pro {
 	 * @since  0.9.1
 	 */
 	public function register_widget() {
-		require_once( RPWE_CLASS . 'widget.php' );
-		register_widget( 'Recent_Posts_Widget_Pro' );
+		require_once( RPWPro_WIDGETS . '/widget.php' );
+		//register_widget( 'Recent_Posts_Widget_Pro' );
 	}
 
 	/**
@@ -131,7 +131,7 @@ class RPW_Pro {
 	 * @since  0.9.4
 	 */
 	function register_image_size() {
-		add_image_size( 'rpwe-thumbnail', 45, 45, true );
+		add_image_size( 'RPWPro-thumbnail', 45, 45, true );
 	}
 
 }
